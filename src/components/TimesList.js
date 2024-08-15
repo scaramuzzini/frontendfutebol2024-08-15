@@ -19,7 +19,11 @@ function TimesList() {
             );
         console.log(response.data);
         setTimes(response.data);
-    }
+    };
+
+    const handleTimeAdded = (novoTime) => {
+        setTimes([...times, novoTime]);
+    };
 
     useEffect(() => {
         fetchTimes();
@@ -28,7 +32,7 @@ function TimesList() {
     return (
         <>
             <h2>Tabela de Times</h2>
-            <AddTime/>
+            <AddTime onTimeAdded={handleTimeAdded}/>
             <table>
                 <thead>
                     <tr>
@@ -39,7 +43,7 @@ function TimesList() {
                 </thead>
                 <tbody>
                     {times.map((time) => (
-                        <tr>
+                        <tr key={time.id}>
                             <td>{time.id}</td>
                             <td>{time.nome}</td>
                             <td>{time.ano_fundacao}</td>

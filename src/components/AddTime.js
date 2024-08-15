@@ -4,7 +4,7 @@ import axios from 'axios';
 const headers = {
     "ngrok-skip-browser-warning": "123"
 }
-function AddTime() {
+function AddTime({onTimeAdded}) {
     const [nome,setNome] = useState('');
 
     
@@ -24,6 +24,7 @@ function AddTime() {
             );
             console.log(response);
             setNome('');
+            onTimeAdded(response.data);
         } catch(error) {
             console.error('Falha ao criar novo time:'+error);
         }
