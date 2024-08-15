@@ -21,6 +21,18 @@ function TimesList() {
         setTimes(response.data);
     };
 
+    // deletar um time
+    const handleDelete = async (id) => {
+        const response = await axios
+        .delete(`https://146d-191-165-254-55.ngrok-free.app/times/${id}`
+            , {
+                headers: headers
+            }
+        ); 
+        console.log(response.data);
+        fetchTimes();
+    }
+
     const handleTimeAdded = (novoTime) => {
         setTimes([...times, novoTime]);
     };
@@ -39,6 +51,7 @@ function TimesList() {
                         <th>ID</th>
                         <th>Nome do Time</th>
                         <th>Ano de Fundação</th>
+                        <th>Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +60,7 @@ function TimesList() {
                             <td>{time.id}</td>
                             <td>{time.nome}</td>
                             <td>{time.ano_fundacao}</td>
+                            <td><button onClick={() => handleDelete(time.id)}>Deletar</button></td>
                         </tr>
                     ))}
                 </tbody>
